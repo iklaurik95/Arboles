@@ -9,10 +9,13 @@ import javax.swing.JComboBox;
 import javax.swing.JTextPane;
 import java.awt.Font;
 import javax.swing.JLabel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Main extends JFrame {
 
 	private JPanel contentPane;
+	
 
 	/**
 	 * Launch the application.
@@ -42,6 +45,12 @@ public class Main extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton botonAbrirFormulario = new JButton("Abrir Formulario");
+		botonAbrirFormulario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirFormulario();
+				
+			}
+		});
 		botonAbrirFormulario.setBounds(153, 138, 139, 23);
 		contentPane.add(botonAbrirFormulario);
 		
@@ -57,5 +66,11 @@ public class Main extends JFrame {
 		JButton botonBorrar = new JButton("Borrar");
 		botonBorrar.setBounds(263, 194, 105, 23);
 		contentPane.add(botonBorrar);
+	}
+
+	protected void abrirFormulario() {
+		// TODO Auto-generated method stub
+		Datos hija = new Datos(this,true);
+		hija.setVisible(true);
 	}
 }
