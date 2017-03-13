@@ -15,6 +15,7 @@ import java.awt.event.ActionEvent;
 public class Main extends JFrame {
 
 	private JPanel contentPane;
+	private JComboBox lista;
 	
 
 	/**
@@ -44,19 +45,19 @@ public class Main extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton botonAbrirFormulario = new JButton("Abrir Formulario");
-		botonAbrirFormulario.addActionListener(new ActionListener() {
+		JButton botonInsertar = new JButton("Insertar");
+		botonInsertar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				abrirFormulario();
 				
 			}
 		});
-		botonAbrirFormulario.setBounds(153, 138, 139, 23);
-		contentPane.add(botonAbrirFormulario);
+		botonInsertar.setBounds(153, 138, 139, 23);
+		contentPane.add(botonInsertar);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(153, 86, 139, 20);
-		contentPane.add(comboBox);
+		JComboBox lista = new JComboBox();
+		lista.setBounds(153, 86, 139, 20);
+		contentPane.add(lista);
 		
 		JLabel labelListaArbol = new JLabel("LISTA DE ARBOLES");
 		labelListaArbol.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
@@ -70,7 +71,12 @@ public class Main extends JFrame {
 
 	protected void abrirFormulario() {
 		// TODO Auto-generated method stub
-		Datos hija = new Datos(this,true);
+		Datos hija = new Datos(this,"Formulario Arbol",true);
 		hija.setVisible(true);
+	}
+	
+	public void anadirArbol(Arbol arbol){
+		this.lista.addItem(arbol.getNombre() + " " + arbol.getZona() + " " + arbol.getAltura());
+		
 	}
 }

@@ -8,6 +8,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 
 public class Datos extends JDialog {
 
@@ -17,15 +21,13 @@ public class Datos extends JDialog {
 	private JTextField textoAltura;
 
 	/**
-	 * Launch the application.
-	 */
-
-	/**
 	 * Create the dialog.
-	 * @param b 
-	 * @param main 
 	 */
-	public Datos(Main main, boolean b) {
+		 
+	public Datos(javax.swing.JFrame parent, String titulo, boolean modal){
+		
+		super(parent,titulo,modal);
+		
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -33,23 +35,24 @@ public class Datos extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JLabel labelIntroduccionDeDatos = new JLabel("INTRODUCCION DE DATOS");
+			labelIntroduccionDeDatos.setBackground(new Color(240, 240, 240));
 			labelIntroduccionDeDatos.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
 			labelIntroduccionDeDatos.setBounds(102, 21, 201, 27);
 			contentPanel.add(labelIntroduccionDeDatos);
 		}
 		{
 			JLabel labelNombre = new JLabel("NOMBRE:");
-			labelNombre.setBounds(102, 66, 46, 14);
+			labelNombre.setBounds(101, 66, 65, 14);
 			contentPanel.add(labelNombre);
 		}
 		{
 			JLabel labelZona = new JLabel("ZONA:");
-			labelZona.setBounds(102, 106, 46, 14);
+			labelZona.setBounds(102, 106, 64, 14);
 			contentPanel.add(labelZona);
 		}
 		{
 			JLabel labelAltura = new JLabel("ALTURA:");
-			labelAltura.setBounds(102, 145, 46, 14);
+			labelAltura.setBounds(102, 145, 64, 14);
 			contentPanel.add(labelAltura);
 		}
 		{
@@ -71,24 +74,29 @@ public class Datos extends JDialog {
 			textoAltura.setColumns(10);
 		}
 		{
-			JButton botonInsertar = new JButton("Insertar");
-			botonInsertar.setBounds(233, 194, 89, 23);
-			contentPanel.add(botonInsertar);
-		}
-		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				JButton botonGuardar = new JButton("Guardar");
+				botonGuardar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						String nombre = textoNombre.getText();
+						String zona = textoZona.getText();
+						double altura = Double.parseDouble(textoAltura.getText());
+						
+						Arbol arbol = new Arbol(nombre,zona,altura);
+						((Main) getParent()).anadirArbol(arbol);
+						}
+				});
+				botonGuardar.setActionCommand("Guardar");
+				buttonPane.add(botonGuardar);
+				getRootPane().setDefaultButton(botonGuardar);
 			}
 			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				JButton botonCancelar = new JButton("Cancelar");
+				botonCancelar.setActionCommand("Cancelar");
+				buttonPane.add(botonCancelar);
 			}
 		}
 	}
