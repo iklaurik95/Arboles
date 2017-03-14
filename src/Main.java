@@ -55,7 +55,7 @@ public class Main extends JFrame {
 		botonInsertar.setBounds(153, 138, 139, 23);
 		contentPane.add(botonInsertar);
 		
-		JComboBox lista = new JComboBox();
+		lista = new JComboBox();
 		lista.setBounds(153, 86, 139, 20);
 		contentPane.add(lista);
 		
@@ -65,6 +65,11 @@ public class Main extends JFrame {
 		contentPane.add(labelListaArbol);
 		
 		JButton botonBorrar = new JButton("Borrar");
+		botonBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				lista.removeItemAt(lista.getSelectedIndex());
+			}
+		});
 		botonBorrar.setBounds(263, 194, 105, 23);
 		contentPane.add(botonBorrar);
 	}
